@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title Forms
+  body
+    form(method="post" style="margin: auto; width: 400px" id="form")
+      .title Form
+      .subtitle Add to list
+      .field
+        .control
+          input.input(placeholder="Text" id="text")
+        .control.is-grouped
+          button.button(type="submit") Submit
+          
+    script(src="bundle.js")
+    script(src="ajax.js")
+    script.
+      form.onsubmit = function(e) {
+        e.preventDefault()
+          var obj = {
+            text: text.value
+          }
+        ajax('/form', {
+          type: 'POST',
+          data: obj,
+          success: function (res) {
+            text.value = "";
+            console.log(res)
+          }
+        })
+      }
